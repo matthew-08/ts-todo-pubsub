@@ -1,7 +1,7 @@
 import { Todo, TodoInput } from './Todo';
 
-class Database {
-  private _todos: Todo[] = JSON.parse(localStorage.get('todos')) || [];
+export class Database {
+  private _todos: Todo[] = JSON.parse(localStorage.getItem('todos')) || [];
 
   getTodos() {
     return this._todos;
@@ -15,8 +15,8 @@ class Database {
     return this._todos.find(({ id }) => id === todoId);
   }
 
-  createTodo() {
-    this._todos.push();
+  createTodo(todo: Todo) {
+    this._todos.push(todo);
     this._setLocalStorage();
   }
 
@@ -27,5 +27,10 @@ class Database {
     this._setLocalStorage();
   }
 
-  deleteTodo() {}
+  deleteTodo({ id }: Todo) {
+    this._todos = this._todos.filter((todo) => todo.id !== id);
+    this._setLocalStorage();
+  }
 }
+
+export default Database;

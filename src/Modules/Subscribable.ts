@@ -1,18 +1,7 @@
 import { TodoInput } from './Todo';
 
-type ProjectInput = {
-  name: string;
-};
-
-type TodoAddedInput = {
-  projectId: number;
-  todoInput: TodoInput;
-};
-
 interface EventArgsMap {
-  PROJECT_ADDED: ProjectInput;
-  TODO_ADDED: TodoAddedInput;
-  EDIT_TODO: TodoAddedInput;
+  TODO_ADDED: TodoInput;
 }
 
 type Test = {

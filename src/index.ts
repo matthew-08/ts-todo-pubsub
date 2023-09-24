@@ -1,25 +1,9 @@
-const target = {
-  message1: 'hello',
-  message2: 'everyone',
-};
+import { todo } from 'node:test';
+import Database from './Modules/Database';
+import { Todo } from './Modules/Todo';
 
-class Test {
-  foo: 1 = 1;
-  bar: 2 = 2;
+const db = new Database();
 
-  method() {}
-}
+const todos = db.getTodos();
 
-const ok = new Test();
-
-const proxy = new Proxy(ok, {
-  get(target, prop, receiver) {
-    console.log(prop);
-    if (prop === 'foo') {
-      return 'PROXIED';
-    }
-    return Reflect.get(target, prop, receiver);
-  },
-});
-
-console.log(proxy.method());
+console.log(todos);
