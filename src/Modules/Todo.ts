@@ -4,18 +4,15 @@ import { Subscriber } from './Subscriber';
 export type TodoInput = {
   title: string;
   description: string;
-  projectIds: number[];
 };
 
-class Todo {
+export class Todo {
   title: string;
   description: string;
   id: number;
-  projectIds: number[];
-  constructor({ description, title, projectIds }: TodoInput) {
+  constructor({ description, title }: TodoInput) {
     this.title = title;
     this.description = description;
-    this.projectIds = projectIds;
     this.id = Math.floor(Math.random() * (5000 - 1 + 1)) + 1;
   }
 }

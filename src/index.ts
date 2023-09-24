@@ -1,16 +1,25 @@
-import { Controller } from './Modules/Controller';
-import { View } from './Modules/View';
+const target = {
+  message1: 'hello',
+  message2: 'everyone',
+};
 
-const app = new Controller();
+class Test {
+  foo: 1 = 1;
+  bar: 2 = 2;
 
-const view = new View(app);
+  method() {}
+}
 
-view.handleAddProject('test');
+const ok = new Test();
 
-view.handleAddTodo({
-  description: 'hello',
-  title: '123',
-  projectIds: [1],
+const proxy = new Proxy(ok, {
+  get(target, prop, receiver) {
+    console.log(prop);
+    if (prop === 'foo') {
+      return 'PROXIED';
+    }
+    return Reflect.get(target, prop, receiver);
+  },
 });
-console.log('test');
-console.log(view.handleGetAllTodos());
+
+console.log(proxy.method());
