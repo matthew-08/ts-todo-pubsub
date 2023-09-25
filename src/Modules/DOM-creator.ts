@@ -1,4 +1,5 @@
 import { string } from 'zod';
+import { Todo } from './Todo';
 
 const domGenHelper = (
   element: keyof HTMLElementTagNameMap,
@@ -9,13 +10,24 @@ const domGenHelper = (
   return userElement;
 };
 
+const appendChildren = (
+  appendee: HTMLElement,
+  elementsToAppend: HTMLElement[]
+) => {
+  elementsToAppend.forEach((element) => appendee.appendChild(element));
+  return appendee;
+};
+
 export class DOMCreator {
-  generateTodoRow() {
+  generateTodoRow(todo: Todo) {
     const section = domGenHelper('div', 'todo-row');
-    const text = domGenHelper('p', 'todo-text');
+    const title = domGenHelper('p', 'todo-title');
+    const desc = domGenHelper('p', 'todo-desc');
     const deleteButton = domGenHelper('button', 'todo-delete-button');
-    section.appendChild(text);
-    section.appendChild(deleteButton);
-    return section;
+    deleteButton.textContent = 'Delete';
+    title.textContent = todo.title;
+    desc.textContent = todo.description;
+    const todoRow = appendChildren(section, [title, desc, deleteButton]);
+    return todoRow;
   }
 }

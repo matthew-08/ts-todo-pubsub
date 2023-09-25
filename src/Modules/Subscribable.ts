@@ -1,7 +1,8 @@
-import { TodoInput } from './Todo';
+import { Todo, TodoInput } from './Todo';
 
 interface EventArgsMap {
   TODO_ADDED: TodoInput;
+  RENDER_TODOS: Todo[];
 }
 
 type Test = {
